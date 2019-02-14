@@ -1,0 +1,36 @@
+<head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"></head>
+
+{% load static %}
+
+<body class="blue-grey lighten-5">
+    <div class="container">
+        <div class="row">
+            <h4 class="col s12 l5 offset-l4">Your score: {{ correct_answers|length }} out of {{ session.answers|length }}</h4>
+            <div class="col s12 l2 offset-s4 offset-l1">
+                <a href="{% url 'polls:session' %}" class="btn indigo" style="margin-top: 25px">Play again</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            {% for question, answer, hero in correct_answers %}
+                <div class="col s6 m4 l3">
+                    <div class="card">
+                        <div class="card-content">
+                            <img src="{% static hero.portrait.name %}"></img> <div style="display: block">{{ answer }} is the <strong><span class="green-text text-lighten-1">CORRECT</span></strong> answer!</div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            {% for question, answer, hero in incorrect_answers %}
+                <div class="col s6 m4 l3">
+                    <div class="card">
+                        <div class="card-content">
+                            <img src="{% static hero.portrait.name %}"></img> <div style="display: block">{{ answer }} is <strong><span class="red-text text-lighten-1">INCORRECT</span></strong><br> (It's {{ question.question_name }})</div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}         
+        </div>
+    </div>
+</body>
