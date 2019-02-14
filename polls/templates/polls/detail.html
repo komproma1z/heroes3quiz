@@ -1,4 +1,7 @@
-<head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"></head>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Question</title>
+</head>
 
 {% load static %}
 
@@ -24,7 +27,7 @@
             <div style="width: 200px; display: flex; flex-direction: column; margin-left: 110px">
                 {% for choice in answers %}
                     <label style="display: inline-flex" for="choice{{ forloop.counter }}">
-                        <input class="indigo" type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.choice_text }}"/>
+                        <input required class="indigo" type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.choice_text }}"/>
                         <span style="color: #2e2e2e">{{ choice.choice_text }}</span>
                     </label> 
                 {% endfor %}
