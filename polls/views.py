@@ -22,9 +22,14 @@ class DetailView(View):
         else:
             question = session.questions.order_by('id').all()[session.current_question]
             hero = Hero.objects.get(name=question.question_name)
+            portrait = hero.portrait.path
+            static_index = portrait.find('\static')
+            if static_index < 0:
+                static_index = portrait.find('/static')
+            portrait = portrait[static_index:]
             answers = [i for i in question.choice_set.all()]
             random.shuffle(answers)
-            return render(request, self.template_name, {'question': question, 'session': session, 'hero': hero, 'answers': answers})
+            return render(request, self.template_name, {'question': question, 'session': session, 'hero': hero, 'answers': answers, 'portrait': portrait})
 
     def post(self, request, pk):
         selected_choice = request.POST['choice']
