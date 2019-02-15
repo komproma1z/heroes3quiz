@@ -63,12 +63,17 @@ def results(request, pk):
     correct_answers = []
     incorrect_answers = []
     for i in questions:
+        portrait = hero.portrait.path
+        static_index = portrait.find('\static')
+        if static_index < 0:
+            static_index = portrait.find('/static')
+        portrait = portrait[static_index:]
         answer = session.answers[str(i.pk)]
         hero = Hero.objects.get(name=i.question_name)
         if i.question_name == answer:
-            correct_answers.append((i, answer, hero))
+            correct_answers.append((i, answer, hero, portrait))
         else:
-            incorrect_answers.append((i, answer, hero))
+            incorrect_answers.append((i, answer, hero, portrait))
     return render(request, 'polls/results.html', {'session': session, 'correct_answers': correct_answers, 'incorrect_answers': incorrect_answers})
 
 

@@ -15,20 +15,20 @@
     </div>
     <div class="container">
         <div class="row">
-            {% for question, answer, hero in correct_answers %}
+            {% for question, answer, hero, portrait in correct_answers %}
                 <div class="col s6 m4 l3">
                     <div class="card">
                         <div class="card-content">
-                            <img src="{% static hero.portrait.name %}"></img> <div style="display: block">{{ answer }} is the <strong><span class="green-text text-lighten-1">CORRECT</span></strong> answer!</div>
+                            <img src="{{portrait}}"></img> <div style="display: block">{{ answer }} is the <strong><span class="green-text text-lighten-1">CORRECT</span></strong> answer!</div>
                         </div>
                     </div>
                 </div>
             {% endfor %}
-            {% for question, answer, hero in incorrect_answers %}
+            {% for question, answer, hero, portrait in incorrect_answers %}
                 <div class="col s6 m4 l3">
                     <div class="card">
                         <div class="card-content">
-                            <img src="{% static hero.portrait.name %}"></img> <div style="display: block">{{ answer }} is <strong><span class="red-text text-lighten-1">INCORRECT</span></strong><br> (It's {{ question.question_name }})</div>
+                            <img src="{{portrait}}"></img> <div style="display: block">{{ answer }} is <strong><span class="red-text text-lighten-1">INCORRECT</span></strong><br> (It's {{ question.question_name }})</div>
                         </div>
                     </div>
                 </div>
